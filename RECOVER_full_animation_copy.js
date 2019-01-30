@@ -1,6 +1,5 @@
 
-
-
+console.log('ca'+ca)
 var roulette,turn ,deadCheck;
 var deadArrayList;
 var enable= false;
