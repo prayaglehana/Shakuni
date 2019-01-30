@@ -1,9 +1,7 @@
-var sourceFile = require('./ethereum_regme.js');
-console.log('address is ');
-console.log(sourceFile.ca);
-console.log('end')
-var ca=sourceFile.ca;
-var roulette , turn ,deadCheck;
+
+
+
+var roulette,turn ,deadCheck;
 var deadArrayList;
 var enable= false;
 var db = firebase.database();

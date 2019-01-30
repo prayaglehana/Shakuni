@@ -17,12 +17,12 @@
         var fc = factoryContract.at('0x1d716f1a40dd575669840280c1aba43870a96d8d');
 
         var recentContract=fc.recentContract();
-       var roulette ;
+     
        var person1_add;
        var person2_add;
        var owner;
        var turn;
-       var ca;
+     
        $("#status").html('Opponent is not found yet Please Wait');
            
 
@@ -56,8 +56,8 @@
                                                 if(res.args.address_==web3.eth.accounts[0])
                                                     {console.log('string Accepted');
                                                 
-                                                    console.log('roullete address'+ca);
-                                                module.exports = { ca:ca};
+                                                    
+
                                                 
                                                     window.location.href = "RECOVER_full_animation_copy.html";}
                                             }  });
