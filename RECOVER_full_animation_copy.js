@@ -1,7 +1,14 @@
 
+
+var qs = new Querystring();
+var ca= qs.get("myVar");
+
 console.log('ca'+ca)
 var roulette,turn ,deadCheck;
 var deadArrayList;
+
+
+
 var enable= false;
 var db = firebase.database();
 var ref = db.ref('scores'+'/LW5yw9KoQEEBXfrA68s');
