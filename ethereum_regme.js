@@ -6,7 +6,23 @@
             // set the provider you want from Web3.providers
             web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
         }
-        
+        var db = firebase.database();
+var ref_person = db.ref('person_address->contract_address');
+
+
+function set_ca(pa,ca){
+	ref_person.set({
+		pa:ca
+	});
+}
+function get_ca(){
+
+	ref_person.on('value',gotData_,errData_);
+}
+function gotData_(data){
+	console.log(data.val().x4e62e99A48d36AfD4B21B814058E862FC6173f7F)
+}
+
       
     
         
@@ -58,7 +74,7 @@
                                                 if(res.args.address_==web3.eth.accounts[0])
                                                     {console.log('string Accepted');
                                                 
-                                                    
+                                                    set_ca(web3.eth.accounts[0].toString(),ca.toString());
 
                                                 
                                                     window.location.href = "RECOVER_full_animation_copy.html?myVar1="+ca.toString();}
