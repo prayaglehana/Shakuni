@@ -106,7 +106,7 @@ function gotData_(data){
 			console.error(error);
 	});
 	
-	deadArrayCreated = roulette.deadArrayCreated();
+	
 
 	console.log('robject'+roulette);
 
@@ -124,7 +124,7 @@ function gotData_(data){
 
 		else   console.error(error);
 	 });
-
+	 anim(lib = lib||{}, images = images||{}, createjs = createjs||{}, ss = ss||{}, AdobeAn = AdobeAn||{});
 
 
 	
@@ -136,7 +136,7 @@ function gotData_(data){
 
 
 
-(function (lib, img, cjs, ss, an) {
+function anim(lib, img, cjs, ss, an ){
 	
 	
 	if (typeof web3 !== 'undefined') {
@@ -158,7 +158,7 @@ function gotData_(data){
 var person1_add;
 var person2_add;
 var owner;
-var deadArrayCreated;
+var deadArrayCreated=roulette.deadArrayCreated();;
 	
 	
 
@@ -3979,6 +3979,6 @@ lib.properties = {
 
 
 
-})(lib = lib||{}, images = images||{}, createjs = createjs||{}, ss = ss||{}, AdobeAn = AdobeAn||{});
+};
 var lib, images, createjs, ss, AdobeAn;
 
