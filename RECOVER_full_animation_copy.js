@@ -1,4 +1,4 @@
-
+var lib, images, createjs, ss, AdobeAn;
 
 var roulette,turn ,deadCheck;
 var deadArrayList;
@@ -69,7 +69,7 @@ function gotData_(data){
 	console.log(data.val());
 	console.log('ed');
 	roulette = rouletteContract.at(ca);				
-console('r');
+console.log('r');
 console.log(roulette);
 console.log('end');
 
@@ -3983,5 +3983,5 @@ lib.properties = {
 
 
 };
-var lib, images, createjs, ss, AdobeAn;
+
 
