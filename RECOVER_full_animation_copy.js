@@ -1,11 +1,13 @@
-var lib, images, createjs, ss, AdobeAn;
+
+
 
 var roulette,turn ,deadCheck;
+var person1_add,person2_add,deadArrayCreated,turn,p;
 var deadArrayList;
-
-
 var ca;
 var enable= false;
+
+
 var db = firebase.database();
 var ref_person = db.ref('person_address->contract_address');
 var ref = db.ref('scores'+'/LW5yw9KoQEEBXfrA68s');
@@ -49,7 +51,7 @@ var ref = db.ref('scores'+'/LW5yw9KoQEEBXfrA68s');
 	}
 	
 	var rouletteContract = web3.eth.contract ([{"constant":true,"inputs":[],"name":"regTill","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"x","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"a","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"DA","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"Fire","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"dead","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"person1","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"showDeadArray","outputs":[{"name":"","type":"uint8[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"b","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"person2","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"currentRound","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"registerMe","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"Turn","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"claimReward","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"makeDeadArray","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"b_","type":"string"}],"name":"getStringB","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"a_","type":"string"}],"name":"getStringA","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"winner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"address_","type":"address"}],"name":"StringAccepted","type":"event"},{"anonymous":false,"inputs":[],"name":"opponentFound","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"DA_","type":"uint8[]"}],"name":"deadArrayCreated","type":"event"}]);
-	var roulette ;
+	var roulette ;//= rouletteContract.at('0x260457365f3d0c22ad178f71176f432469b47085') ;
 	get_ca();
 			
 
@@ -69,37 +71,13 @@ function gotData_(data){
 	console.log(data.val());
 	console.log('ed');
 	roulette = rouletteContract.at(ca);				
-console.log('r');
-console.log(roulette);
-console.log('end');
+	console.log('r');
+	console.log(roulette);
+	console.log('end');
+		
 
 
-	 anim(lib = lib||{}, images = images||{}, createjs = createjs||{}, ss = ss||{}, AdobeAn = AdobeAn||{});
-
-
-	
-
-
-
-}
-
-
-
-
-function anim(lib, img, cjs, ss, an ){
-
-	console.log('called');
-
-	
-	
-
-
-
-	
-var person1_add;
-var person2_add;
-var owner;
-var deadArrayCreated=roulette.deadArrayCreated();;
+deadArrayCreated=roulette.deadArrayCreated();;
 	
 		
 roulette.person1.call(function(error, result){
@@ -143,6 +121,25 @@ roulette.Turn.call(function(err,res){
 		
 	}
 })
+	
+	 
+
+
+
+	
+
+
+
+}
+
+
+
+
+(function (lib, img, cjs, ss, an ){
+
+	console.log('called');
+
+
 
 
 
@@ -153,17 +150,6 @@ console.log('robject'+roulette);
 //  roulette.registerMe({from: web3.eth.accounts[1], gas: 3000000, value: web3.toWei('1', 'ether')}, function(err, res){});
 //  roulette.registerMe({from: web3.eth.accounts[2], gas: 3000000, value: web3.toWei('1', 'ether')}, function(err, res){});
 
-
-
-
-roulette.currentRound(function(error, result){
-	console.log('result of current round'+result);
-	if(!error)
-
-				$("#currentRoundid").html(String(result));
-
-	else   console.error(error);
- });
 
 
 var p; // shortcut to reference prototypes
@@ -3523,129 +3509,133 @@ p.nominalBounds = new cjs.Rectangle(-199.1,-308.7,464.2,304.6);
 	this.frame_0 = function() {
 		var root=this;
 
-	
-		
-	deadArrayCreated.watch(function(err,res){
-		if(!err){
-			deadArrayList=res.args.DA_;
-				console.log('deadArray'+deadArrayList);
-					
-				enable=true;	
-		}	
-			});
-
-$("#makeDeadArray_id").click(function(){
-	console.log('makedeadarray called');
-	if(turn==1 && web3.eth.accounts[0]==person1_add)
-			{roulette.makeDeadArray(function(err, res){	
+		if(roulette!==undefined){
+								console.log('helo');
+							deadArrayCreated.watch(function(err,res){
 								if(!err){
-										console.log('deadArrayCreated');
-									
-
-										
-								}
-							});
-						}
-	else if(turn==2 && web3.eth.accounts[0]==person2_add){
-		roulette.makeDeadArray(function(err, res){	
-					if(!err){console.log('deadArrayCreated');
-				
-				}
-		});
-	}
-	});
-	ref.on('child_changed',function(){
-		console.log('helomofo');
-		updateTurn();
-		fl_ClickToGoToAndPlayFromFrame_5();
-	});
-
-		
-		console.log('r'+roulette);
-	
-		
-		this.fireinstance.addEventListener("click",function temp_(){
-			console.log('Fire is clicked');
-			console.log(turn+' '+web3.eth.accounts[0]+' '+ person1_add);
-			console.log('helgds');
-			if((turn%2!=0 && web3.eth.accounts[0]==person1_add) ||(turn%2==0 && web3.eth.accounts[0]==person2_add))
-				incrementTurn();
-		} );
-		
-		function fl_ClickToGoToAndPlayFromFrame_5()
-		{
-			
-			console.log('enable '+enable);
-		
-			
-		
-			if(enable==true){
-												
+									deadArrayList=res.args.DA_;
+										console.log('deadArray'+deadArrayList);
 											
-												
-													//tutnoff			
-												var	turn_=turn-1;
-												
-																							
-										
-													var turnchanged;
+										enable=true;	
+								}	
+									});
 
-												if(turn%2!=0)
-													$("#turnid").html(person1_add);
-												else
-												
-													$("#turnid").html(person2_add);
-									
-										if(turn_%2!=0 )
-										{	
-													
-																if(deadArrayList[turn_-1]==0){
-																		
-																		console.log('person1 is dead');		
-																
-																		root.gotoAndPlay(36); //person1shootdie					
-																		
-
-																		
-																	}
-																	else{
-																		console.log('person1 is not dead');
-																	
-																		root.gotoAndPlay(184); //person1shootnodie
-																	
-																	}
-																
-														
-										}
-											else if(turn_%2==0 ){
-																if(deadArrayList[turn_-1]==0)	{
-											
-																					console.log('person2 is dead');
-																				
-																				root.gotoAndPlay(344);//person2shootdie
-																	
-																			
-																			}
-																			
-																				else{
-																					console.log('person2 is not dead');
-																				
-																					root.gotoAndPlay(443); //person2shootnodie
-																					}
-																				
-														
-															}
+						$("#makeDeadArray_id").click(function(){
+							console.log('makedeadarray called');
+							if(turn==1 && web3.eth.accounts[0]==person1_add)
+									{roulette.makeDeadArray(function(err, res){	
+														if(!err){
+																console.log('deadArrayCreated');
 															
-														
 
-			
-						}
-				
+																
+														}
+													});
+												}
+							else if(turn==2 && web3.eth.accounts[0]==person2_add){
+								roulette.makeDeadArray(function(err, res){	
+											if(!err){console.log('deadArrayCreated');
+										
+										}
+								});
+							}
+							});
+							ref.on('child_changed',function(){
+								console.log('helomofo');
+								updateTurn();
+								fl_ClickToGoToAndPlayFromFrame_5();
+							});
+
+								
+								console.log('r'+roulette);
+							
+								
+								this.fireinstance.addEventListener("click",function temp_(){
+									console.log('Fire is clicked');
+									console.log(turn+' '+web3.eth.accounts[0]+' '+ person1_add);
+									console.log('helgds');
+									if((turn%2!=0 && web3.eth.accounts[0]==person1_add) ||(turn%2==0 && web3.eth.accounts[0]==person2_add))
+										incrementTurn();
+								} );
+								
+								function fl_ClickToGoToAndPlayFromFrame_5()
+								{
+									
+									console.log('enable '+enable);
+								
+									
+								
+									if(enable==true){
+																		
+																	
+																		
+																			//tutnoff			
+																		var	turn_=turn-1;
+																		
+																													
+																
+																			var turnchanged;
+
+																		if(turn%2!=0)
+																			$("#turnid").html(person1_add);
+																		else
+																		
+																			$("#turnid").html(person2_add);
+															
+																if(turn_%2!=0 )
+																{	
+																			
+																						if(deadArrayList[turn_-1]==0){
+																								
+																								console.log('person1 is dead');		
+																						
+																								root.gotoAndPlay(36); //person1shootdie					
+																								
+
+																								
+																							}
+																							else{
+																								console.log('person1 is not dead');
+																							
+																								root.gotoAndPlay(184); //person1shootnodie
+																							
+																							}
+																						
+																				
+																}
+																	else if(turn_%2==0 ){
+																						if(deadArrayList[turn_-1]==0)	{
+																	
+																											console.log('person2 is dead');
+																										
+																										root.gotoAndPlay(344);//person2shootdie
+																							
+																									
+																									}
+																									
+																										else{
+																											console.log('person2 is not dead');
+																										
+																											root.gotoAndPlay(443); //person2shootnodie
+																											}
+																										
+																				
+																					}
+																					
+																				
+
+									
+												}
+										
 
 
-	
-		
-		}
+							
+								
+								}
+							}
+							else{
+										console.log('yet to be defined');
+							}
 	}
 	this.frame_35 = function() {
 		/* Stop at This Frame
@@ -3982,6 +3972,6 @@ lib.properties = {
 
 
 
-};
+})(lib = lib||{}, images = images||{}, createjs = createjs||{}, ss = ss||{}, AdobeAn = AdobeAn||{});
 
-
+var lib, images, createjs, ss, AdobeAn;
