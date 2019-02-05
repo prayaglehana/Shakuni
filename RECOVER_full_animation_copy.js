@@ -82,7 +82,7 @@ function gotData_(data){
 						{     person1_add=result;
 							console.log('step1');
 							$("#pers1").html(result);
-							if(person1_add !==undefined && person2_add!==undefined)
+							if(person1_add !==undefined && person2_add!==undefined )
 							{console.log('p1 ad p2 defined');
 								id = web3.sha3(person1_add.toString()+person2_add.toString());
 							updateTurn();}
@@ -98,7 +98,7 @@ function gotData_(data){
 							person2_add=result;
 							console.log('step2');
 							$("#pers2").html(result);
-							if(person1_add !==undefined && person2_add!==undefined)
+							if(person1_add !==undefined && person2_add!==undefined )
 							{console.log('p1 ad p2 defined');
 								id = web3.sha3(person1_add.toString()+person2_add.toString());
 							updateTurn();}
