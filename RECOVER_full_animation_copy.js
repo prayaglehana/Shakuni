@@ -23,14 +23,17 @@ var ref = db.ref('scores');
 				}
 
 				function updateTurn(){
-
-					ref.on('value',gotData,errData);
+					new_ref=db.ref('scores/'+id.toString())
+					new_ref.on('value',gotData,errData);
 					
 
 				}
 				function gotData(data){
-					turn=data.val().score;
-					
+					turn=data.val();
+					if(turn%2!=0)
+						$("#turnid").html(person1_add);
+					else 
+						$("#turnid").html(person2_add);
 					console.log('present turn no '+turn);
 
 				}
@@ -95,6 +98,10 @@ roulette.person2.call(function(error, result){
 	else
 		console.error(error);
 });
+id = web3.sha3(person1_add.toString()+person2_add.toString());
+
+//new_ref_=db.ref('scores/'+id.toString())
+//new_ref_.on('value',GD,erD);
 
 
 roulette.Turn.call(function(err,res){
