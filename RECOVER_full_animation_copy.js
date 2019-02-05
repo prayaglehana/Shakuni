@@ -6,20 +6,20 @@ var person1_add,person2_add,deadArrayCreated,turn,p;
 var deadArrayList;
 var ca;
 var enable= false;
-
+var id ;
 
 var db = firebase.database();
 var ref_person = db.ref('person_address->contract_address');
-var ref = db.ref('scores'+'/LW5yw9KoQEEBXfrA68s');
+var ref = db.ref('scores');
 
 
 				//ref.push(data);
 				function incrementTurn(){
 					console.log('trn oncremented');
-					ref.set({
-						name:'roulleteGAME',
-						score : turn+1
+					ref.update({
+						[id]:turn+1
 					});
+
 				}
 
 				function updateTurn(){
@@ -68,12 +68,7 @@ function gotData_(data){
 	console.log(data.val())
 	ca=data.val();
 	console.log(ca);
-	console.log(data.val());
-	console.log('ed');
 	roulette = rouletteContract.at(ca);				
-	console.log('r');
-	console.log(roulette);
-	console.log('end');
 		
 
 
@@ -111,13 +106,12 @@ roulette.Turn.call(function(err,res){
 		if(turn==1)
 			$("#turnid").html(person1_add);
 		else if(turn==2)
-		
 			$("#turnid").html(person2_add);
 
-			ref.set({
-				name:'roulleteGAME',
-				score : turn
-			});
+	id = web3.utils.sha3(person1_add.toString()+person2_add.toString())
+	ref.update({
+					[id]:turn
+	});
 		
 	}
 })
