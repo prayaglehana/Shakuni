@@ -24,7 +24,7 @@ var ref_person = db.ref('person_address->contract_address');
 				function updateTurn(){
 					
 					db.ref('scores/'+id.toString()).on('value',gotData,errData);
-					db.ref(x).on('value',gotData,errData);
+					//db.ref(x).on('value',gotData,errData);
 					
 
 				}
@@ -3611,7 +3611,7 @@ p.nominalBounds = new cjs.Rectangle(-199.1,-308.7,464.2,304.6);
 	
 
 
-		
+		console.log('frame_35 says to go back ');
 		this.gotoAndPlay(1);
 	}
 	this.frame_87 = function() {
