@@ -108,7 +108,7 @@ roulette.Turn.call(function(err,res){
 		else if(turn==2)
 			$("#turnid").html(person2_add);
 
-	id = web3.utils.sha3(person1_add.toString()+person2_add.toString())
+	id = web3.sha3(person1_add.toString()+person2_add.toString())
 	ref.update({
 					[id]:turn
 	});
