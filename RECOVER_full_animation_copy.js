@@ -3490,10 +3490,8 @@ p.nominalBounds = new cjs.Rectangle(-199.1,-308.7,464.2,304.6);
 	// timeline functions:
 	this.frame_0 = function() {
 		var root=this;
-		console.log('per frame turn : '+turn);
-		if(roulette!==undefined && turn!==undefined){
-								console.log('helo everything is defined');
-							deadArrayCreated.watch(function(err,res){
+		if(roulette!==undefined)
+							{deadArrayCreated.watch(function(err,res){
 								if(!err){
 									deadArrayList=res.args.DA_;
 										console.log('deadArray'+deadArrayList);
@@ -3501,15 +3499,19 @@ p.nominalBounds = new cjs.Rectangle(-199.1,-308.7,464.2,304.6);
 										enable=true;	
 								}	
 									});
+							}
 
 						$("#makeDeadArray_id").click(function(){
 							console.log('makedeadarray called');
-							if( web3.eth.accounts[0]==person1_add && turn==1)
-									{roulette.makeDeadArray(function(err, res){
-											if(!err){console.log('deadArrayCreated');	}
-														});	
-									}
-							});
+
+											if(roulette!==undefined && turn!==undefined)
+													{if( web3.eth.accounts[0]==person1_add && turn==1)
+														{roulette.makeDeadArray(function(err, res){	if(!err){console.log('deadArrayCreated');	}	});	}	}
+											else
+												console.log('roulette or turn is undefined ');
+											
+											}
+										);
 							db.ref('scores/'+id.toString()).on('child_changed',function(){
 								console.log('turn value is changed');
 								updateTurn();
@@ -3591,10 +3593,7 @@ p.nominalBounds = new cjs.Rectangle(-199.1,-308.7,464.2,304.6);
 							
 								
 								}
-							}
-							else{
-										console.log('yet to be defined');
-							}
+							
 	}
 	this.frame_35 = function() {
 		/* Stop at This Frame
@@ -3611,7 +3610,7 @@ p.nominalBounds = new cjs.Rectangle(-199.1,-308.7,464.2,304.6);
 	
 
 
-		console.log('frame_35 says to go back ');
+		//console.log('frame_35 says to go back ');
 		this.gotoAndPlay(1);
 	}
 	this.frame_87 = function() {
