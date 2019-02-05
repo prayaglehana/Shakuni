@@ -44,7 +44,7 @@ var ref_person = db.ref('person_address->contract_address');
 				function errData_(err){
 					console.log(err);
 					}
-					updateTurn();	
+					
 	
 	if (typeof web3 !== 'undefined') {
 		web3 = new Web3(web3.currentProvider);
