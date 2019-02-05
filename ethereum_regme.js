@@ -7,6 +7,7 @@
             web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
         }
         var db = firebase.database();
+
 var ref_person = db.ref('person_address->contract_address');
 
 
