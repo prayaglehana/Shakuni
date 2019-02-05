@@ -2,7 +2,7 @@
 
 
 var roulette,turn ,deadCheck;
-var person1_add,person2_add,deadArrayCreated,turn,p;
+var person1_add,person2_add,deadArrayCreated,p;
 var deadArrayList;
 var ca;
 var enable= false;
@@ -97,16 +97,12 @@ roulette.person2.call(function(error, result){
 	else
 		console.error(error);
 });
-id = web3.sha3(person1_add.toString()+person2_add.toString());
 
-
-		updateTurn();
+if(person1_add !==undefined && person2_add!==undefined)
+{id = web3.sha3(person1_add.toString()+person2_add.toString());
+updateTurn();}
 	
 
-
-	id = web3.sha3(person1_add.toString()+person2_add.toString())
-	
-	
 	
 	 
 
@@ -3495,7 +3491,7 @@ p.nominalBounds = new cjs.Rectangle(-199.1,-308.7,464.2,304.6);
 	this.frame_0 = function() {
 		var root=this;
 
-		if(roulette!==undefined){
+		if(roulette!==undefined && turn!==undefined){
 								console.log('helo');
 							deadArrayCreated.watch(function(err,res){
 								if(!err){
@@ -3508,23 +3504,11 @@ p.nominalBounds = new cjs.Rectangle(-199.1,-308.7,464.2,304.6);
 
 						$("#makeDeadArray_id").click(function(){
 							console.log('makedeadarray called');
-							if(turn==1 && web3.eth.accounts[0]==person1_add)
-									{roulette.makeDeadArray(function(err, res){	
-														if(!err){
-																console.log('deadArrayCreated');
-															
-
-																
-														}
-													});
-												}
-							else if(turn==2 && web3.eth.accounts[0]==person2_add){
-								roulette.makeDeadArray(function(err, res){	
-											if(!err){console.log('deadArrayCreated');
-										
-										}
-								});
-							}
+							if( web3.eth.accounts[0]==person1_add && turn==1)
+									{roulette.makeDeadArray(function(err, res){
+											if(!err){console.log('deadArrayCreated');	}
+														});	
+									}
 							});
 							db.ref('scores/'+id.toString()).on('child_changed',function(){
 								console.log('turn value is changed');
@@ -3557,19 +3541,8 @@ p.nominalBounds = new cjs.Rectangle(-199.1,-308.7,464.2,304.6);
 																		
 																			//tutnoff			
 																		var	turn_=turn-1;
-																		
-																													
-																
-																			var turnchanged;
-
-																		if(turn%2!=0)
-																			$("#turnid").html(person1_add);
-																		else
-																		
-																			$("#turnid").html(person2_add);
-															
-																if(turn_%2!=0 )
-																{	
+																	if(turn_%2!=0 )
+																			{	
 																			
 																						if(deadArrayList[turn_-1]==0){
 																								
