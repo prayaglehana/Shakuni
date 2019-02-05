@@ -67,50 +67,43 @@ function get_ca(){
 
 }
 function gotData_(data){
-	console.log(data.val())
-	ca=data.val();
-	console.log(ca);
-	roulette = rouletteContract.at(ca);				
-		
+			console.log(data.val())
+			ca=data.val();
+			console.log(ca);
+			roulette = rouletteContract.at(ca);				
+				
 
 
-deadArrayCreated=roulette.deadArrayCreated();;
+		deadArrayCreated=roulette.deadArrayCreated();;
 	
 		
-roulette.person1.call(function(error, result){
-	if(!error)
-		{     person1_add=result;
-			$("#pers1").html(result);
-		  
-		}
-	else
-		console.error(error);
-});   
+				roulette.person1.call(function(error, result){
+					if(!error)
+						{     person1_add=result;
+							console.log('step1');
+							$("#pers1").html(result);
+						
+						}
+					else
+						console.error(error);
+				});   
 
-roulette.person2.call(function(error, result){
-	if(!error)
-		{
-			person2_add=result;
-			$("#pers2").html(result);
-		 
-		}
-	else
-		console.error(error);
-});
-
-if(person1_add !==undefined && person2_add!==undefined)
-{id = web3.sha3(person1_add.toString()+person2_add.toString());
-updateTurn();}
-	
-
-	
-	 
-
-
-
-	
-
-
+				roulette.person2.call(function(error, result){
+					if(!error)
+						{
+							person2_add=result;
+							console.log('step2');
+							$("#pers2").html(result);
+						
+						}
+					else
+						console.error(error);
+				});
+				console.log('step 3')
+				if(person1_add !==undefined && person2_add!==undefined)
+				{console.log('p1 ad p2 defined');
+					id = web3.sha3(person1_add.toString()+person2_add.toString());
+				updateTurn();}
 
 }
 
