@@ -24,10 +24,12 @@ var ref_person = db.ref('person_address->contract_address');
 				function updateTurn(){
 					
 					db.ref('scores/'+id.toString()).on('value',gotData,errData);
+					db.ref(x).on('value',gotData,errData);
 					
 
 				}
 				function gotData(data){
+				
 					turn=data.val();
 					if(turn%2!=0)
 						$("#turnid").html(person1_add);
@@ -42,7 +44,7 @@ var ref_person = db.ref('person_address->contract_address');
 				function errData_(err){
 					console.log(err);
 					}
-						
+					updateTurn();	
 	
 	if (typeof web3 !== 'undefined') {
 		web3 = new Web3(web3.currentProvider);
@@ -3488,9 +3490,9 @@ p.nominalBounds = new cjs.Rectangle(-199.1,-308.7,464.2,304.6);
 	// timeline functions:
 	this.frame_0 = function() {
 		var root=this;
-
+		console.log('per frame turn : '+turn);
 		if(roulette!==undefined && turn!==undefined){
-								console.log('helo');
+								console.log('helo everything is defined');
 							deadArrayCreated.watch(function(err,res){
 								if(!err){
 									deadArrayList=res.args.DA_;
