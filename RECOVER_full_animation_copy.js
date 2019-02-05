@@ -10,21 +10,20 @@ var id ;
 
 var db = firebase.database();
 var ref_person = db.ref('person_address->contract_address');
-var ref = db.ref('scores');
 
 
 				//ref.push(data);
 				function incrementTurn(){
 					console.log('trn oncremented');
-					ref.update({
+					db.ref('scores').update({
 						[id]:turn+1
 					});
 
 				}
 
 				function updateTurn(){
-					new_ref=db.ref('scores/'+id.toString())
-					new_ref.on('value',gotData,errData);
+					
+					db.ref('scores/'+id.toString()).on('value',gotData,errData);
 					
 
 				}
@@ -100,28 +99,14 @@ roulette.person2.call(function(error, result){
 });
 id = web3.sha3(person1_add.toString()+person2_add.toString());
 
-//new_ref_=db.ref('scores/'+id.toString())
-//new_ref_.on('value',GD,erD);
 
+		updateTurn();
+	
 
-roulette.Turn.call(function(err,res){
-	if(!err){
-		turn = parseInt(String(res),10);
-		console.log('turn');
-		console.log( turn);
-		console.log('turnend');
-		if(turn==1)
-			$("#turnid").html(person1_add);
-		else if(turn==2)
-			$("#turnid").html(person2_add);
 
 	id = web3.sha3(person1_add.toString()+person2_add.toString())
-	ref.update({
-					[id]:turn
-	});
-		
-	}
-})
+	
+	
 	
 	 
 
@@ -3541,8 +3526,8 @@ p.nominalBounds = new cjs.Rectangle(-199.1,-308.7,464.2,304.6);
 								});
 							}
 							});
-							ref.on('child_changed',function(){
-								console.log('helomofo');
+							db.ref('scores/'+id.toString()).on('child_changed',function(){
+								console.log('turn value is changed');
 								updateTurn();
 								fl_ClickToGoToAndPlayFromFrame_5();
 							});
