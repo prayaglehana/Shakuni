@@ -21,26 +21,8 @@ var ref_person = db.ref('person_address->contract_address');
 
 				}
 
-				function updateTurn(){
-					
-					db.ref('scores/'+id.toString()).on('value',gotData,errData);
-					//db.ref(x).on('value',gotData,errData);
-					
-
-				}
-				function gotData(data){
-				
-					turn=data.val();
-					if(turn%2!=0)
-						$("#turnid").html(person1_add);
-					else 
-						$("#turnid").html(person2_add);
-					console.log('present turn no '+turn);
-
-				}
-				function errData(err){
-				console.log(err);
-				}
+	
+		
 				function errData_(err){
 					console.log(err);
 					}
@@ -87,7 +69,8 @@ function gotData_(data){
 							if(person1_add !==undefined && person2_add!==undefined )
 							{console.log('p1 ad p2 defined');
 								id = web3.sha3(person1_add.toString()+person2_add.toString());
-							updateTurn();}
+								db.ref('scores/'+id.toString()).once('value',	function gotData(data){	turn=data.val();		if(turn%2!=0)	$("#turnid").html(person1_add);	else 	$("#turnid").html(person2_add);		console.log('present turn no '+turn);					},	function errData(err){console.log(err);});
+							}
 						
 						}
 					else
@@ -103,7 +86,9 @@ function gotData_(data){
 							if(person1_add !==undefined && person2_add!==undefined )
 							{console.log('p1 ad p2 defined');
 								id = web3.sha3(person1_add.toString()+person2_add.toString());
-							updateTurn();}
+								db.ref('scores/'+id.toString()).once('value',	function gotData(data){	turn=data.val();		if(turn%2!=0)	$("#turnid").html(person1_add);	else 	$("#turnid").html(person2_add);		console.log('present turn no '+turn);					},	function errData(err){console.log(err);});
+
+							}
 						
 						}
 					else
@@ -3505,18 +3490,26 @@ p.nominalBounds = new cjs.Rectangle(-199.1,-308.7,464.2,304.6);
 							console.log('makedeadarray called');
 
 											if(roulette!==undefined && turn!==undefined)
-													{if( web3.eth.accounts[0]==person1_add && turn==1)
+													{if( web3.eth.accounts[0]==person1_add && turn==1 )
 														{roulette.makeDeadArray(function(err, res){	if(!err){console.log('deadArrayCreated');	}	});	}	}
 											else
 												console.log('roulette or turn is undefined ');
 											
 											}
 										);
-							db.ref('scores/'+id.toString()).on('child_changed',function(){
-								console.log('turn value is changed');
-								updateTurn();
+										
+					db.ref('scores/'+id.toString()).on('value',	function gotData(data){
+								turn=data.val();
+								console.log('turn value changed')	;
+					
+								if(turn%2!=0)	$("#turnid").html(person1_add);		
+								else 	$("#turnid").html(person2_add);	
 								fl_ClickToGoToAndPlayFromFrame_5();
-							});
+									console.log('present turn no '+turn);}
+								,	function errData(err){console.log(err);});
+						
+
+
 
 								
 								console.log('r'+roulette);

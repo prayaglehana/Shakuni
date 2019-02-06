@@ -15,8 +15,7 @@ function set_ca(pa,ca){
 	ref_person.update({
 		[pa]:ca
 	});
-}
-
+}	
 
         
     
