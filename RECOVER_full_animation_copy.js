@@ -3517,8 +3517,7 @@ p.nominalBounds = new cjs.Rectangle(-199.1,-308.7,464.2,304.6);
 								
 								this.fireinstance.addEventListener("click",function temp_(){
 									console.log('Fire is clicked');
-									console.log(turn+' '+web3.eth.accounts[0]+' '+ person1_add);
-									console.log('helgds');
+						
 									if((turn%2!=0 && web3.eth.accounts[0]==person1_add) ||(turn%2==0 && web3.eth.accounts[0]==person2_add))
 										incrementTurn();
 								} );
