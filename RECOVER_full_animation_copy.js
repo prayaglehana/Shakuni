@@ -69,6 +69,7 @@ function gotData_(data){
 							if(person1_add !==undefined && person2_add!==undefined )
 							{console.log('p1 ad p2 defined');
 								id = web3.sha3(person1_add.toString()+person2_add.toString());
+								
 								db.ref('scores/'+id.toString()).once('value',	function gotData(data){	turn=data.val();		if(turn%2!=0)	$("#turnid").html(person1_add);	else 	$("#turnid").html(person2_add);		console.log('present turn no '+turn);					},	function errData(err){console.log(err);});
 							}
 						
