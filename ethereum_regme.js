@@ -22,7 +22,7 @@ function set_ca(pa,ca){
     
         var rouletteContract = web3.eth.contract ([{"constant":true,"inputs":[],"name":"regTill","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"a","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"DA","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"s_","type":"string"}],"name":"registerMe","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"dead","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"person1","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"showDeadArray","outputs":[{"name":"","type":"uint8[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"b","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"person2","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"Turn","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"claimReward","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"makeDeadArray","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"b_","type":"string"}],"name":"getStringB","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"a_","type":"string"}],"name":"getStringA","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"winner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"address_","type":"address"}],"name":"StringAccepted","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"DA_","type":"uint8[]"}],"name":"deadArrayCreated","type":"event"}]);
 
-        var fc = factoryContract.at('0xbbd11f2cb5da3c643b31d254398bce70b837f9ec');
+        var fc = factoryContract.at('0xa187b0490650457f00f6e284a966e42e5a2cf4e8');
 
         var recentContract=fc.recentContract();
      
@@ -31,8 +31,9 @@ function set_ca(pa,ca){
        var owner;
        var ca;
        var turn;
+       var opponentFound=false;
      
-       $("#status").html('Opponent is not found yet Please Wait');
+       
            
 
 
@@ -41,13 +42,17 @@ function set_ca(pa,ca){
        recentContract.watch(function(err,res){
       
         if(!err){ 
-            if(res.args.opponentFound==true){               
+            if(res.args.opponentFound==true){        
+                opponentFound=true;       
             console.log('oponentfound');
             $("#status").html('Opponent Found Click Start');}
+            else{
+                $("#status").html('Opponent is not found yet Please Wait');
+            }
 
             if(web3.eth.accounts[0]==res.args.p){
                                     var stringEvent ;
-                                    var opponentFound ;
+                               
                                     console.log('event watching');
                                     console.log('b'+res.args.a_);   
                                     ca=     res.args.a_;
@@ -100,7 +105,7 @@ function set_ca(pa,ca){
     
 
       
-        $("#status").html('Opponent is not found yet Please Wait');
+      
         
       //  roulette.registerMe({from: web3.eth.accounts[1], gas: 3000000, value: web3.toWei('1', 'ether')}, function(err, res){});
       //  roulette.registerMe({from: web3.eth.accounts[2], gas: 3000000, value: web3.toWei('1', 'ether')}, function(err, res){});
@@ -117,35 +122,25 @@ function set_ca(pa,ca){
     
     $("#start").click(function(){
 
-       								
-        roulette.regTill.call(function(err, res){	
-            var totalPeople=parseInt(String(res), 10);
-          
-           if(totalPeople==2)
-                    {
-            
-                    roulette.person1.call(function(err_, res_){	
-                        
-                        if(res_==web3.eth.accounts[0]){ 
+                    if(opponentFound==true){
+                        if(person1_add==web3.eth.accounts[0]){ 
                             console.log('stringa '+ ($("#getString").val()).toString() );
                         roulette.getStringA(($("#getString").val()).toString(),{from: web3.eth.accounts[0], gas: 3000000},
                         function(error, result){   });   }
                        
-                    });
-                    roulette.person2.call(function(err_, res_){	
-                        if(res_==web3.eth.accounts[0]){
+                
+                 
+                        else if(person2_add==web3.eth.accounts[0]){
                             console.log('string b'+ ($("#getString").val()).toString() );
                             roulette.getStringB(($("#getString").val()).toString(),{from: web3.eth.accounts[0], gas: 3000000},
-                            function(error, result){});   }
-                    });
+                            function(error, result){});   }     
+                         }
+                        
                 
       
 
           
 
                     
-                    }
-        else{
-            $("#status").html('Opponent is not found yet Please Wait');
-        }});
+        
   });
