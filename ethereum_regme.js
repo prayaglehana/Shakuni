@@ -22,7 +22,7 @@ function set_ca(pa,ca){
     
         var rouletteContract = web3.eth.contract ([{"constant":true,"inputs":[],"name":"regTill","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"a","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"DA","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"s_","type":"string"}],"name":"registerMe","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"dead","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"person1","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"showDeadArray","outputs":[{"name":"","type":"uint8[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"b","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"person2","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"Turn","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"claimReward","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"makeDeadArray","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"b_","type":"string"}],"name":"getStringB","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"a_","type":"string"}],"name":"getStringA","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"winner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"address_","type":"address"}],"name":"StringAccepted","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"DA_","type":"uint8[]"}],"name":"deadArrayCreated","type":"event"}]);
 
-        var fc = factoryContract.at('0xf5d346b20ad3b72bb155c59f12fe6fd4155704eb');
+        var fc = factoryContract.at('0xb396b896d3491a874c2f201b743843eeef066388');
 
         var recentContract=fc.recentContract();
      
@@ -63,9 +63,7 @@ function set_ca(pa,ca){
                                     console.log('ca'+ca);
                                     roulette.a.call(function(error, result){
                                         if(!error)      {   console.log('a is '+result); } else     console.error(error);    });   
-                                    
-                                   roulette.person1.call(function(error, result){   if(!error)      {   person1_add=result;} else     console.error(error);    });   
-                                 roulette.person2.call(function(error, result){  if(!error) {person2_add=result;     }  else  console.error(error); });
+
                                    // roulette.registerMe({from: web3.eth.accounts[0], gas: 3000000, value: web3.toWei('1', 'ether')}, function(err, res){});
                                     stringEvent = roulette.StringAccepted();
                          
@@ -123,6 +121,9 @@ function set_ca(pa,ca){
     $("#start").click(function(){
 
                     if(opponentFound==true){
+                                                            
+                        roulette.person1.call(function(error, result){   if(!error)      {   person1_add=result;} else     console.error(error);    });   
+                        roulette.person2.call(function(error, result){  if(!error) {person2_add=result;     }  else  console.error(error); });
                         console.log('opponent found ke andr hu');
                         console.log(person1_add +' next '+person2_add);
                         if(person1_add==web3.eth.accounts[0]){ 
