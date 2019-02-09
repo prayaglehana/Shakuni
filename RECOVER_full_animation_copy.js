@@ -14,7 +14,7 @@ var ref_person = db.ref('person_address->contract_address');
 
 				//ref.push(data);
 				function incrementTurn(){
-					console.log('trn oncremented');
+			
 					var inc=turn+1;
 					db.ref('scores').update({
 						[id]:	dataString.slice(0,-1)+(inc).toString()
@@ -45,7 +45,7 @@ var ref_person = db.ref('person_address->contract_address');
 function get_ca(){
 	//var x='p'+(web3.eth.accounts[0]).toString();
 	var x=(web3.eth.accounts[0]).toString();
-	console.log('x'+x);
+
 	var h= db.ref('person_address->contract_address/'+x);
 	h.on('value',gotData_,errData_);
 
@@ -61,10 +61,10 @@ function gotData_(data){
 				roulette.person1.call(function(error, result){
 					if(!error)
 						{     person1_add=result;
-							console.log('step1');
+							
 							$("#pers1").html(result);
 							if(person1_add !==undefined && person2_add!==undefined )
-							{console.log('p1 ad p2 defined');
+							{
 								id = web3.sha3(person1_add.toString()+person2_add.toString());
 								
 								db.ref('scores/'+id.toString()).once('value',	function gotData(data){
@@ -75,7 +75,7 @@ function gotData_(data){
 									enable=true;
 									console.log(deadArrayList);
 										if(turn%2!=0)	$("#turnid").html(person1_add);	
-										else 	$("#turnid").html(person2_add);		console.log('present turn no '+turn);					},	function errData(err){console.log(err);});
+										else 	$("#turnid").html(person2_add);						},	function errData(err){console.log(err);});
 							}
 						
 						}
@@ -87,11 +87,11 @@ function gotData_(data){
 					if(!error)
 						{
 							person2_add=result;
-							console.log('step2');
+						
 							$("#pers2").html(result);
 							
 							if(person1_add !==undefined && person2_add!==undefined )
-							{console.log('p1 ad p2 defined');
+							{
 								id = web3.sha3(person1_add.toString()+person2_add.toString());
 								db.ref('scores/'+id.toString()).once('value',	function gotData(data){
 									dataString=data.val();
@@ -107,7 +107,7 @@ function gotData_(data){
 					else
 						console.error(error);
 				});
-				console.log('step 3')
+			
 			
 
 }
@@ -117,15 +117,7 @@ function gotData_(data){
 
 (function (lib, img, cjs, ss, an ){
 
-	console.log('called');
 
-
-
-
-
-
-
-console.log('robject'+roulette);
 
 //  roulette.registerMe({from: web3.eth.accounts[1], gas: 3000000, value: web3.toWei('1', 'ether')}, function(err, res){});
 //  roulette.registerMe({from: web3.eth.accounts[2], gas: 3000000, value: web3.toWei('1', 'ether')}, function(err, res){});
@@ -3494,12 +3486,12 @@ p.nominalBounds = new cjs.Rectangle(-199.1,-308.7,464.2,304.6);
 					db.ref('scores/'+id.toString()).on('value',	function gotData(data){
 						dataString=data.val();
 						turn=parseInt(dataString[6],10);
-								console.log('turn value changed')	;
+								
 					
 								if(turn%2!=0)	$("#turnid").html(person1_add);		
 								else 	$("#turnid").html(person2_add);	
 								fl_ClickToGoToAndPlayFromFrame_5();
-									console.log('present turn no '+turn);}
+									}
 								,	function errData(err){console.log(err);});
 					}
 						
@@ -3516,7 +3508,6 @@ p.nominalBounds = new cjs.Rectangle(-199.1,-308.7,464.2,304.6);
 								function fl_ClickToGoToAndPlayFromFrame_5()
 								{
 									
-									console.log('enable '+enable);
 								
 									
 								
