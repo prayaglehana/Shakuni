@@ -14,8 +14,9 @@ var ref_person = db.ref('person_address->contract_address');
 
 				//ref.push(data);
 				function incrementTurn(){
-			
+			  
 					var inc=turn+1;
+					console.log('turn being incremented');
 					db.ref('scores').update({
 						[id]:	dataString.slice(0,-1)+(inc).toString()
 					});
@@ -3484,6 +3485,7 @@ p.nominalBounds = new cjs.Rectangle(-199.1,-308.7,464.2,304.6);
 
 	if(id!==undefined){
 					db.ref('scores/'+id.toString()).on('value',	function gotData(data){
+								 console.log('.on called');
 					 	    	dataString=data.val();
 						        turn=parseInt(dataString[6],10);
 								$("#currentRoundid").html(turn);
