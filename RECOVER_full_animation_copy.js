@@ -57,10 +57,6 @@ function gotData_(data){
 			console.log(ca);
 			roulette = rouletteContract.at(ca);				
 				
-
-
-		deadArrayCreated=roulette.deadArrayCreated();;
-	
 		
 				roulette.person1.call(function(error, result){
 					if(!error)
@@ -3488,7 +3484,7 @@ p.nominalBounds = new cjs.Rectangle(-199.1,-308.7,464.2,304.6);
 		var root=this;
 
 
-	
+	if(id!==undefined){
 					db.ref('scores/'+id.toString()).on('value',	function gotData(data){
 						dataString=data.val();
 						turn=parseInt(dataString[6],10);
@@ -3499,6 +3495,7 @@ p.nominalBounds = new cjs.Rectangle(-199.1,-308.7,464.2,304.6);
 								fl_ClickToGoToAndPlayFromFrame_5();
 									console.log('present turn no '+turn);}
 								,	function errData(err){console.log(err);});
+					}
 						
 
 							
