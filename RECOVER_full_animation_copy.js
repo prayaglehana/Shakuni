@@ -17,7 +17,7 @@ var ref_person = db.ref('person_address->contract_address');
 					console.log('trn oncremented');
 					var inc=turn+1;
 					db.ref('scores').update({
-						[id]:	datatring.slice(0,-1)+(inc).toString()
+						[id]:	dataString.slice(0,-1)+(inc).toString()
 					});
 
 				}
