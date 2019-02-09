@@ -1,9 +1,9 @@
 
 
 
-var roulette,turn ,deadCheck;
-var person1_add,person2_add,deadArrayCreated,p;
-var deadArrayList;
+var roulette,turn ;
+var person1_add,person2_add,p;
+var dataString,deadArrayList;
 var ca;
 var enable= false;
 var id ;
@@ -15,8 +15,9 @@ var ref_person = db.ref('person_address->contract_address');
 				//ref.push(data);
 				function incrementTurn(){
 					console.log('trn oncremented');
+					var inc=turn+1;
 					db.ref('scores').update({
-						[id]:turn+1
+						[id]:	datatring.slice(0,-1)+(inc).toString()
 					});
 
 				}
@@ -45,13 +46,13 @@ function get_ca(){
 	//var x='p'+(web3.eth.accounts[0]).toString();
 	var x=(web3.eth.accounts[0]).toString();
 	console.log('x'+x);
-	var h= db.ref('person_address->contract_address'+'/'+x);
+	var h= db.ref('person_address->contract_address/'+x);
 	h.on('value',gotData_,errData_);
 
 
 }
 function gotData_(data){
-			console.log(data.val())
+		
 			ca=data.val();
 			console.log(ca);
 			roulette = rouletteContract.at(ca);				
@@ -70,7 +71,12 @@ function gotData_(data){
 							{console.log('p1 ad p2 defined');
 								id = web3.sha3(person1_add.toString()+person2_add.toString());
 								
-								db.ref('scores/'+id.toString()).once('value',	function gotData(data){	turn=data.val();		if(turn%2!=0)	$("#turnid").html(person1_add);	else 	$("#turnid").html(person2_add);		console.log('present turn no '+turn);					},	function errData(err){console.log(err);});
+								db.ref('scores/'+id.toString()).once('value',	function gotData(data){
+									dataString=data.val();
+                                    turn=parseInt(dataString[6],10);
+                                    deadArrayList=dataString.slice(0,-1);
+										if(turn%2!=0)	$("#turnid").html(person1_add);	
+										else 	$("#turnid").html(person2_add);		console.log('present turn no '+turn);					},	function errData(err){console.log(err);});
 							}
 						
 						}
@@ -87,7 +93,11 @@ function gotData_(data){
 							if(person1_add !==undefined && person2_add!==undefined )
 							{console.log('p1 ad p2 defined');
 								id = web3.sha3(person1_add.toString()+person2_add.toString());
-								db.ref('scores/'+id.toString()).once('value',	function gotData(data){	turn=data.val();		if(turn%2!=0)	$("#turnid").html(person1_add);	else 	$("#turnid").html(person2_add);		console.log('present turn no '+turn);					},	function errData(err){console.log(err);});
+								db.ref('scores/'+id.toString()).once('value',	function gotData(data){
+									dataString=data.val();
+                                    turn=parseInt(dataString[6],10);
+                                    deadArrayList=dataString.slice(0,-1);
+											if(turn%2!=0)	$("#turnid").html(person1_add);	else 	$("#turnid").html(person2_add);		console.log('present turn no '+turn);					},	function errData(err){console.log(err);});
 
 							}
 						
@@ -3476,20 +3486,12 @@ p.nominalBounds = new cjs.Rectangle(-199.1,-308.7,464.2,304.6);
 	// timeline functions:
 	this.frame_0 = function() {
 		var root=this;
-		if(roulette!==undefined)
-							{deadArrayCreated.watch(function(err,res){
-								if(!err){
-									deadArrayList=res.args.DA_;
-										console.log('deadArray'+deadArrayList);
-											
-										enable=true;	
-								}	
-									});
-							}
+
 
 	
 					db.ref('scores/'+id.toString()).on('value',	function gotData(data){
-								turn=data.val();
+						dataString=data.val();
+						turn=parseInt(dataString[6],10);
 								console.log('turn value changed')	;
 					
 								if(turn%2!=0)	$("#turnid").html(person1_add);		
@@ -3499,10 +3501,6 @@ p.nominalBounds = new cjs.Rectangle(-199.1,-308.7,464.2,304.6);
 								,	function errData(err){console.log(err);});
 						
 
-
-
-								
-								console.log('r'+roulette);
 							
 								
 								this.fireinstance.addEventListener("click",function temp_(){
@@ -3528,7 +3526,7 @@ p.nominalBounds = new cjs.Rectangle(-199.1,-308.7,464.2,304.6);
 																	if(turn_%2!=0 )
 																			{	
 																			
-																						if(deadArrayList[turn_-1]==0){
+																						if(parseInt(deadArrayList[turn_-1],10)==0){
 																								
 																								console.log('person1 is dead');		
 																						
@@ -3547,7 +3545,7 @@ p.nominalBounds = new cjs.Rectangle(-199.1,-308.7,464.2,304.6);
 																				
 																}
 																	else if(turn_%2==0 ){
-																						if(deadArrayList[turn_-1]==0)	{
+																						if(parseInt(deadArrayList[turn_-1],10)==0)	{
 																	
 																											console.log('person2 is dead');
 																										
