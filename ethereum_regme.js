@@ -22,7 +22,7 @@ function set_ca(pa,ca){
     
         var rouletteContract = web3.eth.contract ([{"constant":true,"inputs":[],"name":"regTill","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"a","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"DA","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"dead","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"person1","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"showDeadArray","outputs":[{"name":"","type":"uint8[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"b","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"person2","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"s_","type":"string"}],"name":"getString","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"s_","type":"string"},{"name":"p","type":"address"}],"name":"registerMe","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[],"name":"claimReward","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"makeDeadArray","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"winner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"address_","type":"address"},{"indexed":false,"name":"DA_","type":"uint8[]"}],"name":"StringAccepted","type":"event"}]);
 
-        var fc = factoryContract.at('0xd239774d35d70c1317a73b26cab1dfbef6347bdc');
+        var fc = factoryContract.at('0x2f12ef75b18b3401e2d8a0a64895e1fa97c12d50');
 
         var recentContract=fc.recentContract();
 
@@ -107,15 +107,16 @@ function set_ca(pa,ca){
                         stringEvent.watch(function(err,res){
                             console.log('mjkjk');
                                 if(!err){
-                                            console.log('string accep'+res.args.address_);
+                                            
                                             
 
                                             if(res.args.address_==web3.eth.accounts[0])
                                                 {console.log('string Accepted');
-                                                deadArrayList=res.args.DA_;
+                                                var da=res.args.DA_;
+                                                deadArrayList=da.join('')+'1';
                                                 id = web3.sha3(person1_add.toString()+person2_add.toString());
-                                                var str='1'+deadArrayList.toString();
-                                                db.ref('scores').update({  [id]:str }, function(error)
+                                                console.log('Da'+deadArrayList+'last elemt '+deadArrayList[5]);
+                                                db.ref('scores').update({  [id]:deadArrayList}, function(error)
                                                 {if(!error)
                                                     window.location.href = "RECOVER_full_animation_copy.html";}
                                                     );  }
