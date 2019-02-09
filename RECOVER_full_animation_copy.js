@@ -3484,9 +3484,9 @@ p.nominalBounds = new cjs.Rectangle(-199.1,-308.7,464.2,304.6);
 
 	if(id!==undefined){
 					db.ref('scores/'+id.toString()).on('value',	function gotData(data){
-						dataString=data.val();
-						turn=parseInt(dataString[6],10);
-								
+					 	    	dataString=data.val();
+						        turn=parseInt(dataString[6],10);
+								$("#currentRoundid").html(turn);
 					
 								if(turn%2!=0)	$("#turnid").html(person1_add);		
 								else 	$("#turnid").html(person2_add);	
