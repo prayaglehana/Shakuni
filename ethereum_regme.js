@@ -22,7 +22,7 @@ function set_ca(pa,ca){
     
         var rouletteContract = web3.eth.contract ([{"constant":true,"inputs":[],"name":"regTill","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"a","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"DA","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"s_","type":"string"}],"name":"registerMe","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"dead","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"person1","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"showDeadArray","outputs":[{"name":"","type":"uint8[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"b","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"person2","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"s_","type":"string"}],"name":"getString","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"claimReward","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"makeDeadArray","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"winner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"address_","type":"address"}],"name":"StringAccepted","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"DA_","type":"uint8[]"}],"name":"deadArrayCreated","type":"event"}]);
 
-        var fc = factoryContract.at('0xf5d346b20ad3b72bb155c59f12fe6fd4155704eb');
+        var fc = factoryContract.at('0x8f2cc58be8fc17f4ce32031b18de04152f9c9708');
 
         var recentContract=fc.recentContract();
 
@@ -68,11 +68,12 @@ function set_ca(pa,ca){
                                     console.log('ca'+ca);
                          
                                    if(res.args.opponentFound==true)
-                                        $("#status").html('Opponent Found Click Start');
+                                         {opponentFound=true;
+                                        $("#status").html('Opponent Found Click Start');}
           
                                     stringEvent = roulette.StringAccepted();
                                     
-
+                                    
                                     stringEvent.watch(function(err,res){
                                             if(!err){
                                                         console.log('string accep'+res.args.address_);
@@ -110,7 +111,8 @@ function set_ca(pa,ca){
     $("#start").click(function(){
                  
                     console.log('start clicked'+opponentFound);
-                    if(opponentFound==true){       
+                    if(opponentFound==true){
+                        console.log('im in');       
                         roulette.getString(($("#getString").val()).toString(),{from: web3.eth.accounts[0], gas: 3000000},
                         function(error, result){   });   }
                      });
