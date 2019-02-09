@@ -64,7 +64,7 @@ function gotData_(data){
 							
 							$("#pers1").html(result);
 							if(person1_add !==undefined && person2_add!==undefined )
-							{
+							{ 
 								id = web3.sha3(person1_add.toString()+person2_add.toString());
 								
 								db.ref('scores/'+id.toString()).once('value',	function gotData(data){
@@ -3503,11 +3503,11 @@ p.nominalBounds = new cjs.Rectangle(-199.1,-308.7,464.2,304.6);
 									console.log(enable);
 						
 									if((turn%2!=0 && web3.eth.accounts[0]==person1_add) ||(turn%2==0 && web3.eth.accounts[0]==person2_add))
-										incrementTurn();
+										{console.log('increment turn ');incrementTurn();}
 								} );
 								
 								function fl_ClickToGoToAndPlayFromFrame_5()
-								{
+								{ console.log('enable'+enable);
 									
 								
 									
